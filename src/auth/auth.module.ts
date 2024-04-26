@@ -10,12 +10,12 @@ import { Capability } from 'src/users/entity/capabilities.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Capability], 'alfred24_ApiLocale'),
+    TypeOrmModule.forFeature([User, Capability], process.env.DB_LOCAL),
     JwtModule.register({
       global: true,
       secret: jwtConstant.secret,
       signOptions: {
-        expiresIn: '8h'
+        expiresIn: (process.env.JWT_EXP) || '8h'
       },
     }),
     UsersModule,

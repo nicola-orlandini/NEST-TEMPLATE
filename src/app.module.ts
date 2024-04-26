@@ -10,7 +10,7 @@ import { AutorizationGuard } from './auth/guards/autorization.guard';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      name: 'alfred24_ApiLocale',
+      name: process.env.DB_LOCAL,
       type: 'mysql',
       port: 3306,
       host: 'localhost',
@@ -19,7 +19,6 @@ import { AutorizationGuard } from './auth/guards/autorization.guard';
       database: 'alfred24_api',
       autoLoadEntities: true,
       synchronize: true,
-      // entities: [User],
     }),
     UsersModule,
     AuthModule,

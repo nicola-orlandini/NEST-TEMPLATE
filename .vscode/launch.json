@@ -23,7 +23,8 @@
                 "NODE_ENV": "development"
             },
             "sourceMaps": true,
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
         }
     ]
 }

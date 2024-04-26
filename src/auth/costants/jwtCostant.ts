@@ -1,4 +1,4 @@
 export const jwtConstant = {
     // SPOSTARE IN .ENV
-    secret: 'HCwBb&8%9Q;+jLkm/FDprt',
+    secret: process.env.JWT_SECRET
 };

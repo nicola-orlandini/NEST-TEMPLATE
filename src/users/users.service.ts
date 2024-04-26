@@ -9,10 +9,10 @@ import { InsertCapabilityInUserDto } from './dto/insertCapabilityInUser.dto';
 @Injectable()
 export class UsersService {
     constructor(
-        @InjectRepository(User, 'alfred24_ApiLocale')
+        @InjectRepository(User, process.env.DB_LOCAL)
         private userRepository: Repository<User>,
 
-        @InjectRepository(Capability, 'alfred24_ApiLocale')
+        @InjectRepository(Capability, process.env.DB_LOCAL)
         private capabilityRepository: Repository<Capability>
 
     ) { }
