@@ -5,23 +5,25 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug Nest App",
             "type": "node",
             "request": "launch",
-            "name": "NESTJS API",
-            "skipFiles": [
-                "<node_internals>/**"
+            "args": [
+                "${workspaceFolder}/src/main.ts"
             ],
-            "runtimeExecutable": "npm",
             "runtimeArgs": [
-                "run-script",
-                "start:dev"
-              ],
-            // "program": "${workspaceFolder}/src/main.ts",
-            // "preLaunchTask": "tsc: build - tsconfig.json",
-            // "outFiles": [
-            //     "${workspaceFolder}/dist/**/*.js"
-            // ],
-            // "sourceMaps": true
+                "--nolazy",
+                "-r",
+                "ts-node/register",
+                "-r",
+                "tsconfig-paths/register"
+            ],
+            "restart": true,
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "sourceMaps": true,
+            "console": "integratedTerminal"
         }
     ]
 }

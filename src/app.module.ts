@@ -1,31 +1,34 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { LockerModule } from './locker/locker.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { ResponseInterceptor } from './common/response/response.interceptor';
-import { TrakingController } from './traking/traking.controller';
-import { TrakingService } from './traking/traking.service';
-import { TrakingModule } from './traking/traking.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ResponseInterceptor } from './common/interceptor/response.interceptor';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { AutorizationGuard } from './auth/guards/autorization.guard';
 
 @Module({
   imports: [
-    LockerModule,
-    TrakingModule,
+    TypeOrmModule.forRoot({
+      name: 'alfred24_ApiLocale',
+      type: 'mysql',
+      port: 3306,
+      host: 'localhost',
+      username: 'root',
+      password: 'password',
+      database: 'alfred24_api',
+      autoLoadEntities: true,
+      synchronize: true,
+      // entities: [User],
+    }),
+    UsersModule,
     AuthModule,
-    UsersModule
   ],
-  controllers: [
-    AppController,
-    TrakingController
-  ],
+  controllers: [],
   providers: [
+    { provide: APP_GUARD, useClass: AuthGuard },
+    { provide: APP_GUARD, useClass: AutorizationGuard },
     { provide: APP_INTERCEPTOR, useClass: ResponseInterceptor },
-    AppService,
-    TrakingService
   ],
 })
-
 export class AppModule { }

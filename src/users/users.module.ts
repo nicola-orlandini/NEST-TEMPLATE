@@ -1,8 +1,23 @@
 import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersController } from './users.controller';
+import { User } from 'src/users/entity/users.entity';
+import { Capability } from './entity/capabilities.entity';
+
 @Module({
-  providers: [UsersService],
-  exports: [UsersService]
+  imports: [
+    TypeOrmModule.forFeature([User, Capability], 'alfred24_ApiLocale')
+  ],
+  controllers: [
+    UsersController
+  ],
+  providers: [
+    UsersService
+  ],
+  exports: [
+    UsersService
+  ]
 })
-export class UsersModule {}
+export class UsersModule { }
