@@ -10,7 +10,7 @@ import { Capability } from 'src/users/entity/capabilities.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Capability], process.env.DB_LOCAL),
+    TypeOrmModule.forFeature([User, Capability], process.env.DB_NAMESPACE_LOCAL),
     JwtModule.register({
       global: true,
       secret: jwtConstant.secret,

@@ -1,8 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { VersioningType } from '@nestjs/common';
+import { sshInit } from './common/sshForward/sshInit';
 
 async function bootstrap() {
+  if (process.env.SSH_USE && process.env.SSH_USE === "true") {
+    await sshInit()
+  }
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'log']
   });

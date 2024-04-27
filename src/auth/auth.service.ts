@@ -10,9 +10,9 @@ import { Capability } from 'src/users/entity/capabilities.entity';
 @Injectable()
 export class AuthService {
     constructor(
-        @InjectRepository(Capability, process.env.DB_LOCAL)
+        @InjectRepository(Capability, process.env.DB_NAMESPACE_LOCAL)
         private capabilityRepository: Repository<Capability>,
-        @InjectRepository(User, process.env.DB_LOCAL)
+        @InjectRepository(User, process.env.DB_NAMESPACE_LOCAL)
         private userRepository: Repository<User>,
         private usersService: UsersService,
         private jwtService: JwtService,
