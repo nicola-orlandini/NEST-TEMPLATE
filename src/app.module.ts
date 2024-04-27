@@ -34,7 +34,7 @@ import { TrakingModule } from './traking/traking.module';
     }),
     UsersModule,
     AuthModule,
-    TrakingModule
+    TrakingModule,
   ],
   controllers: [],
   providers: [
@@ -43,4 +43,4 @@ import { TrakingModule } from './traking/traking.module';
     { provide: APP_INTERCEPTOR, useClass: ResponseInterceptor },
   ],
 })
-export class AppModule { }
+export class AppModule {}

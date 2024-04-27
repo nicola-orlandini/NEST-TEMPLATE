@@ -7,21 +7,13 @@ import { TrakingService } from './traking.service';
 import { AlfredStatus } from './entity/alfredStatus.entity';
 
 @Module({
-    imports: [
-        TypeOrmModule.forFeature(
-            [
-                AlfredTraking,
-                FermoPointPacchi,
-                AlfredStatus
-            ],
-            process.env.DB_NAMESPACE_ALFRED
-        )
-    ],
-    controllers: [
-        TrakingController
-    ],
-    providers: [
-        TrakingService
-    ],
+  imports: [
+    TypeOrmModule.forFeature(
+      [AlfredTraking, FermoPointPacchi, AlfredStatus],
+      process.env.DB_NAMESPACE_ALFRED,
+    ),
+  ],
+  controllers: [TrakingController],
+  providers: [TrakingService],
 })
-export class TrakingModule { }
+export class TrakingModule {}

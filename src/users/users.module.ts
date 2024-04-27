@@ -9,21 +9,12 @@ import { Capability } from './entity/capabilities.entity';
 @Module({
   imports: [
     TypeOrmModule.forFeature(
-      [
-        User,
-        Capability
-      ],
-      process.env.DB_NAMESPACE_LOCAL
-    )
+      [User, Capability],
+      process.env.DB_NAMESPACE_LOCAL,
+    ),
   ],
-  controllers: [
-    UsersController
-  ],
-  providers: [
-    UsersService
-  ],
-  exports: [
-    UsersService
-  ]
+  controllers: [UsersController],
+  providers: [UsersService],
+  exports: [UsersService],
 })
-export class UsersModule { }
+export class UsersModule {}

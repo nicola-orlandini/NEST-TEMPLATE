@@ -12,39 +12,32 @@ import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
-    ThrottlerModule.forRoot(
-      [
-        {
-          ttl: 60000,
-          limit: 50,
-        }
-      ]
-    ),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,
+        limit: 50,
+      },
+    ]),
     TypeOrmModule.forFeature(
-      [
-        User,
-        Capability
-      ],
-      process.env.DB_NAMESPACE_LOCAL
+      [User, Capability],
+      process.env.DB_NAMESPACE_LOCAL,
     ),
     JwtModule.register({
       global: true,
       secret: jwtConstant.secret,
       signOptions: {
-        expiresIn: (process.env.JWT_EXP) || '8h'
+        expiresIn: process.env.JWT_EXP || '8h',
       },
     }),
     UsersModule,
   ],
-  controllers: [
-    AuthController
-  ],
+  controllers: [AuthController],
   providers: [
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
     AuthService,
-  ]
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

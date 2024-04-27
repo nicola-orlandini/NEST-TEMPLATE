@@ -3,18 +3,18 @@ import { User } from './users.entity';
 
 @Entity({ name: 'capabilities' })
 export class Capability {
-    @PrimaryGeneratedColumn('uuid')
-    uuid: string;
+  @PrimaryGeneratedColumn('uuid')
+  uuid: string;
 
-    @Column()
-    value: string;
+  @Column()
+  value: string;
 
-    @Column()
-    level: number;
+  @Column()
+  level: number;
 
-    @Column({ default: true })
-    isActive: boolean;
+  @Column({ default: true })
+  isActive: boolean;
 
-    @ManyToMany(() => User, user => user.capabilities)
-    users: User[];
+  @ManyToMany(() => User, (user) => user.capabilities)
+  users: User[];
 }
