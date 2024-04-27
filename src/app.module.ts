@@ -7,9 +7,25 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
 import { AutorizationGuard } from './guards/autorization.guard';
 import { TrakingModule } from './traking/traking.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstant } from './auth/costants/jwtCostant';
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,
+        limit: 100,
+      },
+    ]),
+    JwtModule.register({
+      global: true,
+      secret: jwtConstant.secret,
+      signOptions: {
+        expiresIn: process.env.JWT_EXP || '8h',
+      },
+    }),
     TypeOrmModule.forRoot({
       name: process.env.DB_NAMESPACE_LOCAL,
       type: 'mysql',
@@ -38,6 +54,7 @@ import { TrakingModule } from './traking/traking.module';
   ],
   controllers: [],
   providers: [
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
     { provide: APP_GUARD, useClass: AuthGuard },
     { provide: APP_GUARD, useClass: AutorizationGuard },
     { provide: APP_INTERCEPTOR, useClass: ResponseInterceptor },

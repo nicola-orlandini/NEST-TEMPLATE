@@ -4,21 +4,20 @@ import { SignInDto } from './dto/signIn.dto';
 import { Public } from 'src/auth/decorators/public.decorator';
 import { RegisterDto } from './dto/register.dto';
 import { Role, Roles } from './decorators/autorization.decorator';
-import { SkipThrottle } from '@nestjs/throttler';
-// import { SkipThrottle, Throttle, ThrottlerGuard } from '@nestjs/throttler';
+import { Throttle } from '@nestjs/throttler';
 
-@SkipThrottle()
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @SkipThrottle({ default: false })
+  @Throttle({ default: { limit: 50, ttl: 60000 } })
   @Public()
   @Post('login')
   signIn(@Body() signInDto: SignInDto) {
     return this.authService.signIn(signInDto.username, signInDto.password);
   }
 
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
   @Post('register')
   @Roles(Role.SuperAdmin)
   register(@Body() registerDto: RegisterDto) {

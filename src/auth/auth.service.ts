@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,9 +19,12 @@ export class AuthService {
   ) {}
 
   async signIn(username: string, pass: string): Promise<any> {
+    if (!username || !pass) {
+      throw new HttpException('credenziali mancanti', HttpStatus.NOT_FOUND);
+    }
     const user = await this.usersService.getUser(username);
     if (!bcrypt.compare(pass, user?.password)) {
-      throw new UnauthorizedException();
+      throw new HttpException('credenziali errate', HttpStatus.UNAUTHORIZED);
     }
     const payload = {
       uuid: user.uuid,

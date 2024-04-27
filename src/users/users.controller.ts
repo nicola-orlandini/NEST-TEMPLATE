@@ -3,9 +3,9 @@ import { UsersService } from './users.service';
 import { InsertCapabilityDto } from './dto/insertCapability.dto';
 import { InsertCapabilityInUserDto } from './dto/insertCapabilityInUser.dto';
 import { Role, Roles } from 'src/auth/decorators/autorization.decorator';
-// import { UpdateUserDto } from './dto/updateUser.dto';
 import { RequestUserDto } from './dto/requestUser.dto';
 import { DeleteCapabilityDto } from './dto/deleteCapability.dto';
+// import { UpdateUserDto } from './dto/updateUser.dto';
 
 @Controller('user')
 export class UsersController {
@@ -14,18 +14,13 @@ export class UsersController {
   /**
    * GLOBALE
    */
-
-  /**
-   * VISUALIZZA TUTTE LE CAPABILITIES [GLOBALE]
-   */
+  // VISUALIZZA TUTTE LE CAPABILITIES [GLOBALE]
   @Get('capabilities')
   async getCapabilities() {
     return await this.userService.getCapabilities();
   }
 
-  /**
-   * CREA NUOVO PERMESSO [GLOBALE]
-   */
+  // CREA NUOVO PERMESSO [GLOBALE]
   @Roles(Role.SuperAdmin)
   @Put('capability/:value')
   async insertCapability(@Param() insertCapabilityDto: InsertCapabilityDto) {
@@ -35,13 +30,13 @@ export class UsersController {
   /**
    * LOCALE
    */
-
   // INFO USER LOGGATO
   @Get('')
   async getUser(@Req() request: RequestUserDto) {
     return await this.userService.getUser(request.user.username);
   }
 
+  // UPDATE USER
   // @Patch(':id')
   // updateUser(@Body() updateUserDto: UpdateUserDto) {
   // }

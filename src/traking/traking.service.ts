@@ -69,10 +69,10 @@ export class TrakingService {
       if (!trakings[parseInt(index) + 1]) {
         continue;
       }
-      const fromStatus = status.find((item) => {
+      const toStatus = status.find((item) => {
         return item.code == trakings[parseInt(index)].alfred_status;
       }).it;
-      const toStatus = status.find((item) => {
+      const fromStatus = status.find((item) => {
         return item.code == trakings[parseInt(index) + 1].alfred_status;
       }).it;
       trakings[parseInt(index)].alfred_status;
@@ -83,13 +83,13 @@ export class TrakingService {
       timingLines.push({
         diffms: differenzaInMillisecondi,
         diffmsString: `${diffParse.days} giorni, ${diffParse.hours} ore, ${diffParse.minutes} minuti`,
-        from: {
-          ...trakings[parseInt(index)],
-          alfred_status_string: fromStatus,
-        },
         to: {
-          ...trakings[parseInt(index) + 1],
+          ...trakings[parseInt(index)],
           alfred_status_string: toStatus,
+        },
+        from: {
+          ...trakings[parseInt(index) + 1],
+          alfred_status_string: fromStatus,
         },
       });
     }
