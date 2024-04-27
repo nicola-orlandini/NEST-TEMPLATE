@@ -4,8 +4,8 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ResponseInterceptor } from './common/interceptor/response.interceptor';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { AuthGuard } from './auth/guards/auth.guard';
-import { AutorizationGuard } from './auth/guards/autorization.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { AutorizationGuard } from './guards/autorization.guard';
 import { TrakingModule } from './traking/traking.module';
 
 @Module({

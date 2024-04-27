@@ -7,10 +7,26 @@ import { jwtConstant } from './costants/jwtCostant';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../users/entity/users.entity';
 import { Capability } from 'src/users/entity/capabilities.entity';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Capability], process.env.DB_NAMESPACE_LOCAL),
+    ThrottlerModule.forRoot(
+      [
+        {
+          ttl: 60000,
+          limit: 50,
+        }
+      ]
+    ),
+    TypeOrmModule.forFeature(
+      [
+        User,
+        Capability
+      ],
+      process.env.DB_NAMESPACE_LOCAL
+    ),
     JwtModule.register({
       global: true,
       secret: jwtConstant.secret,
@@ -24,6 +40,10 @@ import { Capability } from 'src/users/entity/capabilities.entity';
     AuthController
   ],
   providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
     AuthService,
   ]
 })

@@ -8,7 +8,14 @@ import { AlfredStatus } from './entity/alfredStatus.entity';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([AlfredTraking, FermoPointPacchi, AlfredStatus], process.env.DB_NAMESPACE_ALFRED)
+        TypeOrmModule.forFeature(
+            [
+                AlfredTraking,
+                FermoPointPacchi,
+                AlfredStatus
+            ],
+            process.env.DB_NAMESPACE_ALFRED
+        )
     ],
     controllers: [
         TrakingController
