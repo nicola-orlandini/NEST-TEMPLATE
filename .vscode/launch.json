@@ -24,7 +24,7 @@
             },
             "sourceMaps": true,
             "console": "integratedTerminal",
-            "envFile": "${workspaceFolder}/.env",
+            // "envFile": "${workspaceFolder}/.env",
         }
     ]
 }

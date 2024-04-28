@@ -5,8 +5,10 @@ import { InsertCapabilityInUserDto } from './dto/insertCapabilityInUser.dto';
 import { Role, Roles } from 'src/auth/decorators/autorization.decorator';
 import { RequestUserDto } from './dto/requestUser.dto';
 import { DeleteCapabilityDto } from './dto/deleteCapability.dto';
+import { ApiTags } from '@nestjs/swagger';
 // import { UpdateUserDto } from './dto/updateUser.dto';
 
+@ApiTags('Impostazioni utente')
 @Controller('user')
 export class UsersController {
   constructor(private userService: UsersService) {}
