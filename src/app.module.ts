@@ -1,15 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { AuthModule } from './components/auth/auth.module';
+import { UsersModule } from './components/users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ResponseInterceptor } from './common/interceptor/response.interceptor';
+import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
 import { AutorizationGuard } from './guards/autorization.guard';
-import { TrakingModule } from './traking/traking.module';
+import { TrakingModule } from './components/traking/traking.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstant } from './auth/costants/jwtCostant';
+import { jwtConstant } from './components/auth/costants/jwtCostant';
+import { WinstonModule } from './modules/winston.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { jwtConstant } from './auth/costants/jwtCostant';
       autoLoadEntities: true,
       synchronize: false,
     }),
+    WinstonModule,
     UsersModule,
     AuthModule,
     TrakingModule,

@@ -2,7 +2,10 @@ import { Controller, Param, Get, Req, Delete, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { InsertCapabilityDto } from './dto/insertCapability.dto';
 import { InsertCapabilityInUserDto } from './dto/insertCapabilityInUser.dto';
-import { Role, Roles } from 'src/auth/decorators/autorization.decorator';
+import {
+  Role,
+  Roles,
+} from 'src/components/auth/decorators/autorization.decorator';
 import { RequestUserDto } from './dto/requestUser.dto';
 import { DeleteCapabilityDto } from './dto/deleteCapability.dto';
 import { ApiTags } from '@nestjs/swagger';

@@ -1,18 +1,18 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/signIn.dto';
-import { Public } from 'src/auth/decorators/public.decorator';
+import { Public } from 'src/components/auth/decorators/public.decorator';
 import { RegisterDto } from './dto/register.dto';
 import { Role, Roles } from './decorators/autorization.decorator';
 import { Throttle } from '@nestjs/throttler';
-import { ApiHeader, ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Autenticazione')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
-  @ApiOperation({ description: "Login di autenticazione" })
+  @ApiOperation({ description: 'Login di autenticazione' })
   @Throttle({ default: { limit: 50, ttl: 60000 } })
   @Public()
   @Post('login')
@@ -20,7 +20,7 @@ export class AuthController {
     return this.authService.signIn(signInDto.username, signInDto.password);
   }
 
-  @ApiOperation({ description: "Crea un utente nuovo" })
+  @ApiOperation({ description: 'Crea un utente nuovo' })
   @ApiHeader({
     name: 'Authorization',
     description: 'Bearer token ottenuto dalla login',

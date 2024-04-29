@@ -6,7 +6,10 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { ROLES_KEY, Role } from '../auth/decorators/autorization.decorator';
+import {
+  ROLES_KEY,
+  Role,
+} from '../components/auth/decorators/autorization.decorator';
 
 @Injectable()
 export class AutorizationGuard implements CanActivate {

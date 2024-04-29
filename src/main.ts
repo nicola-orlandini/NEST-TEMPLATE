@@ -7,9 +7,7 @@ import { VersioningType } from '@nestjs/common';
 import { sshInit } from './common/sshForward/sshInit';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-
 async function bootstrap() {
-  
   if (process.env.SSH_USE && process.env.SSH_USE === 'true') {
     await sshInit();
   }
