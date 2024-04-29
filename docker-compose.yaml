@@ -1,0 +1,26 @@
+#[CMD]: docker compose -p alfred24_api up
+
+services:
+  alfred24_api_server:
+    build: ./
+    image: alfred24_api_server
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    depends_on:
+      - alfred24_api_db
+    environment:
+      API_HOST: "0.0.0.0"
+      API_PORT: ${API_PORT}
+      MYSQL_HOST: "alfred24_api_db"
+
+  alfred24_api_db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - ./.data/alfred24_api_db:/data/db
