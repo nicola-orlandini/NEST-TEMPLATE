@@ -1,9 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/signIn.dto';
-import { Public } from 'src/components/auth/decorators/public.decorator';
+import { Public } from 'src/decorators/public.decorator';
 import { RegisterDto } from './dto/register.dto';
-import { Role, Roles } from './decorators/autorization.decorator';
+import { Role, Roles } from '../../decorators/autorization.decorator';
 import { Throttle } from '@nestjs/throttler';
 import { ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
 

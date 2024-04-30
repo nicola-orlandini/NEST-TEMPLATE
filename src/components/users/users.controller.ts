@@ -5,7 +5,7 @@ import { InsertCapabilityInUserDto } from './dto/insertCapabilityInUser.dto';
 import {
   Role,
   Roles,
-} from 'src/components/auth/decorators/autorization.decorator';
+} from 'src/decorators/autorization.decorator';
 import { RequestUserDto } from './dto/requestUser.dto';
 import { DeleteCapabilityDto } from './dto/deleteCapability.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -27,7 +27,7 @@ export class UsersController {
 
   // CREA NUOVO PERMESSO [GLOBALE]
   @Roles(Role.SuperAdmin)
-  @Put('capability/:value')
+  @Put('capability/:name')
   async insertCapability(@Param() insertCapabilityDto: InsertCapabilityDto) {
     return await this.userService.insertCapability(insertCapabilityDto);
   }
@@ -48,7 +48,7 @@ export class UsersController {
 
   // CREA PERMESSO PER L'UTENTE
   @Roles(Role.Admin)
-  @Put('local-capability/:value')
+  @Put('local-capability/:name')
   async matchCapability(
     @Req() request: RequestUserDto,
     @Param() insertCapabilityInUserDto: InsertCapabilityInUserDto,
@@ -59,14 +59,14 @@ export class UsersController {
     );
   }
 
-  @Delete('local-capability/:value')
+  @Delete('local-capability/:name')
   async deleteCapability(
     @Req() request: RequestUserDto,
-    @Param() param: DeleteCapabilityDto,
+    @Param() deleteCapabilityDto: DeleteCapabilityDto,
   ) {
     return await this.userService.deleteCapability(
       request.user.username,
-      param.value,
+      deleteCapabilityDto.name,
     );
   }
 }

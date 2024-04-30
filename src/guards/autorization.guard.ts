@@ -9,7 +9,7 @@ import { Reflector } from '@nestjs/core';
 import {
   ROLES_KEY,
   Role,
-} from '../components/auth/decorators/autorization.decorator';
+} from '../decorators/autorization.decorator';
 
 @Injectable()
 export class AutorizationGuard implements CanActivate {

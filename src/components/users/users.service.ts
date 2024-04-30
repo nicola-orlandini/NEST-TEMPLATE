@@ -17,7 +17,7 @@ export class UsersService {
     private capabilityRepository: Repository<Capability>,
 
     private winstonLoggerService: WinstonLoggerService,
-  ) {}
+  ) { }
 
   async getUser(username: string) {
     try {
@@ -71,7 +71,7 @@ export class UsersService {
   async insertCapability(insertCapabilityDto: InsertCapabilityDto) {
     try {
       const isCapability = await this.capabilityRepository.findOne({
-        where: { value: insertCapabilityDto.value },
+        where: { value: insertCapabilityDto.name },
       });
       if (isCapability) {
         throw new HttpException(
@@ -80,7 +80,7 @@ export class UsersService {
         );
       }
       const capability = new Capability();
-      capability.value = insertCapabilityDto.value;
+      capability.value = insertCapabilityDto.name;
       capability.level = 1;
       return await this.capabilityRepository.save(capability);
     } catch (error) {
@@ -104,7 +104,7 @@ export class UsersService {
       }
       if (user && user.capabilities) {
         for (const cap of user.capabilities) {
-          if (cap.value == insertCapabilityInUserDto.value) {
+          if (cap.value == insertCapabilityInUserDto.name) {
             throw new HttpException(
               'capability already match for user',
               HttpStatus.CONFLICT,
@@ -113,7 +113,7 @@ export class UsersService {
         }
       }
       const capability = await this.capabilityRepository.findOne({
-        where: { value: insertCapabilityInUserDto.value },
+        where: { value: insertCapabilityInUserDto.name },
       });
       if (!capability) {
         throw new HttpException('capability not found', HttpStatus.NOT_FOUND);
@@ -136,7 +136,7 @@ export class UsersService {
         user.capabilities = [capability];
       }
       await this.userRepository.save(user);
-      return `"${insertCapabilityInUserDto.value}" capability insert in user "${username}"`;
+      return `"${insertCapabilityInUserDto.name}" capability insert in user "${username}"`;
     } catch (error) {
       this.winstonLoggerService.error(
         `[users.service.ts][insertCapabilityinUser]: ${error.message}`,

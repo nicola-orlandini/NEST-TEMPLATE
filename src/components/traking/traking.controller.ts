@@ -11,7 +11,7 @@ export class TrakingController {
   constructor(private trakingService: TrakingService) {}
 
   @Get('barcode/:barcode')
-  async getBarcode(@Param() param: GetBarcodeDto) {
-    return await this.trakingService.getBarcode(param.barcode);
+  async getBarcode(@Param() getBarcodeDto: GetBarcodeDto) {
+    return await this.trakingService.getBarcode(getBarcodeDto.barcode);
   }
 }
