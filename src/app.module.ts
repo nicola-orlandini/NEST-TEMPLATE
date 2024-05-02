@@ -6,7 +6,6 @@ import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
 import { AutorizationGuard } from './guards/autorization.guard';
-import { TrakingModule } from './components/traking/traking.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstant } from './components/auth/costants/jwtCostant';
@@ -28,7 +27,7 @@ import { WinstonModule } from './modules/winston.module';
       },
     }),
     TypeOrmModule.forRoot({
-      name: process.env.DB_NAMESPACE_LOCAL,
+      name: process.env.DB_NAMESPACE,
       type: 'mysql',
       port: parseInt(process.env.MYSQL_PORT) || 3306,
       host: process.env.MYSQL_HOST,
@@ -38,21 +37,9 @@ import { WinstonModule } from './modules/winston.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    TypeOrmModule.forRoot({
-      name: process.env.DB_NAMESPACE_ALFRED,
-      type: 'mysql',
-      port: parseInt(process.env.MYSQL_PORT_FORWARD) || 3307,
-      host: process.env.MYSQL_HOST_REMOTE,
-      username: process.env.MYSQL_USER_REMOTE,
-      password: process.env.MYSQL_PASSWORD_REMOTE,
-      database: process.env.MYSQL_DATABASE_REMOTE,
-      autoLoadEntities: true,
-      synchronize: false,
-    }),
     WinstonModule,
     UsersModule,
     AuthModule,
-    TrakingModule,
   ],
   controllers: [],
   providers: [

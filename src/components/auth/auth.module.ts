@@ -10,7 +10,7 @@ import { Capability } from 'src/components/users/entity/capabilities.entity';
   imports: [
     TypeOrmModule.forFeature(
       [User, Capability],
-      process.env.DB_NAMESPACE_LOCAL,
+      process.env.DB_NAMESPACE,
     ),
     UsersModule,
   ],

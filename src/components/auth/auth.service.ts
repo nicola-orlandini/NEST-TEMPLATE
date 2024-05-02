@@ -11,9 +11,9 @@ import { WinstonLoggerService } from 'src/services/winston.service';
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(Capability, process.env.DB_NAMESPACE_LOCAL)
+    @InjectRepository(Capability, process.env.DB_NAMESPACE)
     private capabilityRepository: Repository<Capability>,
-    @InjectRepository(User, process.env.DB_NAMESPACE_LOCAL)
+    @InjectRepository(User, process.env.DB_NAMESPACE)
     private userRepository: Repository<User>,
     private usersService: UsersService,
     private jwtService: JwtService,

@@ -10,10 +10,10 @@ import { WinstonLoggerService } from 'src/services/winston.service';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User, process.env.DB_NAMESPACE_LOCAL)
+    @InjectRepository(User, process.env.DB_NAMESPACE)
     private userRepository: Repository<User>,
 
-    @InjectRepository(Capability, process.env.DB_NAMESPACE_LOCAL)
+    @InjectRepository(Capability, process.env.DB_NAMESPACE)
     private capabilityRepository: Repository<Capability>,
 
     private winstonLoggerService: WinstonLoggerService,
