@@ -1,4 +1,5 @@
-#[CMD]: docker compose -p alfred24_api up
+#[CMD] BUILD: docker compose build
+#[CMD] START: docker compose -p alfred24_api up
 
 services:
   alfred24_api_server:

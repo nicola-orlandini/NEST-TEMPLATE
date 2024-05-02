@@ -19,7 +19,7 @@ export class TrakingService {
     private alfredStatusRepository: Repository<AlfredStatus>,
 
     private winstonLoggerService: WinstonLoggerService,
-  ) {}
+  ) { }
 
   async getBarcode(barcode: string) {
     try {
@@ -82,7 +82,7 @@ export class TrakingService {
         trakings[parseInt(index)].alfred_status;
         const dateFrom: any = trakings[parseInt(index)].data_inserimento;
         const dateTo: any = trakings[parseInt(index) + 1].data_inserimento;
-        const differenzaInMillisecondi = dateFrom - dateTo;
+        const differenzaInMillisecondi: number = dateFrom - dateTo;
         const diffParse = this.msToTime(differenzaInMillisecondi);
         timingLines.push({
           diffms: differenzaInMillisecondi,
@@ -109,7 +109,7 @@ export class TrakingService {
     }
   }
 
-  private msToTime(ms) {
+  private msToTime(ms: number) {
     const days = Math.floor(ms / (1000 * 60 * 60 * 24));
     const hours = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));

@@ -11,7 +11,7 @@ export class WinstonLoggerService {
       transports: [
         new winston.transports.DailyRotateFile({
           filename: 'api.alfred24-%DATE%.log',
-          level: 'warn',
+          level: 'info',
           datePattern: 'YYYY-MM-DD',
           maxSize: '10M', // max sixe 20mb
           maxFiles: '14d', // delete after 14gg

@@ -30,7 +30,7 @@ async function bootstrap() {
     .addTag('Traking spedizione')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docu/v1', app, document);
+  SwaggerModule.setup('docu/', app, document);
 
   await app.listen(
     parseInt(process.env.API_PORT) || 3000,
